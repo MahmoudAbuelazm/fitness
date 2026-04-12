@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fitness/features/home/ui/screens/home_screen.dart';
-import 'package:fitness/features/nutrition/ui/screens/nutrition_screen.dart';
-import 'package:fitness/features/onboarding/ui/screens/onboarding_screen.dart';
-import 'package:fitness/features/splash/ui/screens/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitness/features/home/presentation/screens/home_screen.dart';
+import 'package:fitness/features/home/logic/home_cubit.dart';
+import 'package:fitness/features/nutrition/presentation/screens/nutrition_screen.dart';
+import 'package:fitness/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:fitness/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fitness/core/routing/routes.dart';
 
 class AppRouter {
@@ -13,7 +15,12 @@ class AppRouter {
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit()..fetchDailyHomeData(),
+            child: const HomeScreen(),
+          ),
+        );
       case Routes.nutrition:
         return MaterialPageRoute(builder: (_) => const NutritionScreen());
       default:

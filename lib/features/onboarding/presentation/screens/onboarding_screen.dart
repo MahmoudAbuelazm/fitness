@@ -1,5 +1,6 @@
-import 'package:fitness/core/helpers/extensions.dart';
+import 'package:fitness/core/helpers/extinsions.dart';
 import 'package:fitness/core/routing/routes.dart';
+import 'package:fitness/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -85,23 +86,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                  children: [
                    Text(
                      _onboardingData[_currentPage]['title']!,
-                     style: const TextStyle(
-                       fontSize: 28,
-                       fontWeight: FontWeight.bold,
-                       color: Colors.white,
-                     ),
+                     style: TextStyles.font28WhiteW700Inter(context),
                      textAlign: TextAlign.center,
                    ),
-                   12.verticalSpace,
+                   SizedBox(height: 12.h(context)),
                    Text(
                      _onboardingData[_currentPage]['subtitle']!,
-                     style: TextStyle(
-                       fontSize: 16,
-                       color: Colors.white.withValues(alpha: 0.8),
-                     ),
+                     style: TextStyles.font16WhiteOpacity80W400Inter(context),
                      textAlign: TextAlign.center,
                    ),
-                   48.verticalSpace,
+                   SizedBox(height: 48.h(context)),
                    Row(
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
@@ -142,7 +136,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                          ),
                          child: Text(
                            _currentPage == _onboardingData.length - 1 ? 'Get Started' : 'Next',
-                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                           style: TextStyles.font16WhiteW700Inter(context),
                          ),
                        ),
                      ],

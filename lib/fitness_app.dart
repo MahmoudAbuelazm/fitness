@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fitness/core/routing/app_router.dart';
 import 'package:fitness/core/routing/routes.dart';
-import 'package:fitness/core/theming/colors.dart';
+import 'package:fitness/core/theme/colors.dart';
 
 class FitnessApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -16,17 +16,17 @@ class FitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: ColorsManager.primary,
-          primary: ColorsManager.primary,
-          secondary: ColorsManager.secondary,
-          tertiary: ColorsManager.tertiary,
+          seedColor: ColorsManagers.yankeesBlue,
+          primary: ColorsManagers.yankeesBlue,
+          secondary: ColorsManagers.ceil,
+          tertiary: ColorsManagers.indianRed,
           surface: Colors.white,
         ),
         textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme,
         ).apply(
-          bodyColor: ColorsManager.textDark,
-          displayColor: ColorsManager.textDark,
+          bodyColor: ColorsManagers.eerieBlack,
+          displayColor: ColorsManagers.eerieBlack,
         ),
         useMaterial3: true,
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fitness/core/helpers/extensions.dart';
+import 'package:fitness/core/helpers/extinsions.dart';
+import 'package:fitness/core/theme/styles.dart';
 
 class NutritionScreen extends StatelessWidget {
   const NutritionScreen({super.key});
@@ -30,21 +31,14 @@ class NutritionScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Total Eaten',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
+                        style: TextStyles.font14WhiteOpacity70W400Inter(context),
                       ),
-                      4.verticalSpace,
-                      const Text(
+                      SizedBox(height: 4.h(context)),
+                      Text(
                         '1,250 kcal',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyles.font24WhiteW700Inter(context),
                       ),
                     ],
                   ),
@@ -56,7 +50,7 @@ class NutritionScreen extends StatelessWidget {
                 ],
               ),
             ),
-            32.verticalSpace,
+            SizedBox(height: 32.h(context)),
             const _MealSection(
               title: 'Breakfast',
               totalKcal: 450,
@@ -66,7 +60,7 @@ class NutritionScreen extends StatelessWidget {
                 {'name': 'Boiled Egg', 'kcal': 125},
               ],
             ),
-            24.verticalSpace,
+            SizedBox(height: 24.h(context)),
             const _MealSection(
               title: 'Lunch',
               totalKcal: 800,
@@ -76,7 +70,7 @@ class NutritionScreen extends StatelessWidget {
                 {'name': 'Brown Rice', 'kcal': 200},
               ],
             ),
-            24.verticalSpace,
+            SizedBox(height: 24.h(context)),
             const _MealSection(
               title: 'Dinner',
               totalKcal: 0,
@@ -129,18 +123,11 @@ class _MealSection extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyles.font18BlackW700Inter(context),
                 ),
                 Text(
                   '$totalKcal kcal',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyles.font16GreyW500Inter(context).copyWith(fontWeight: FontWeight.w600),
                 ),
               ],
             ),
@@ -154,16 +141,11 @@ class _MealSection extends StatelessWidget {
                   children: [
                     Text(
                       item['name'],
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: TextStyles.font16BlackW400Inter(context),
                     ),
                     Text(
                       '${item['kcal']} kcal',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                      style: TextStyles.font14GreyW400Inter(context),
                     ),
                   ],
                 ),
@@ -173,10 +155,7 @@ class _MealSection extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 'No meals logged yet',
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontStyle: FontStyle.italic,
-                ),
+                style: TextStyles.font14GreyW400Inter(context).copyWith(fontStyle: FontStyle.italic),
               ),
             ),
         ],

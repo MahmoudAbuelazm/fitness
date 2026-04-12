@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitness/core/routing/routes.dart';
-import 'package:fitness/core/helpers/extensions.dart';
+import 'package:fitness/core/helpers/extinsions.dart';
+import 'package:fitness/core/theme/styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,15 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
               size: 80,
               color: Theme.of(context).colorScheme.primary,
             ),
-            16.verticalSpace,
+            SizedBox(height: 16.h(context)),
             Text(
               'FITNESS',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w800,
-                color: Theme.of(context).colorScheme.primary,
-                letterSpacing: 2,
-              ),
+              style: TextStyles.font32PrimaryW800Inter(context),
             ),
           ],
         ),
