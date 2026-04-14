@@ -118,7 +118,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                        ElevatedButton(
                          onPressed: () {
                            if (_currentPage == _onboardingData.length - 1) {
-                             context.pushReplacementNamed(Routes.home);
+                             context.pushReplacementNamed(Routes.goalSelection);
                            } else {
                              _pageController.nextPage(
                                duration: const Duration(milliseconds: 300),

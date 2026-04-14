@@ -24,4 +24,10 @@ class ColorsManagers {
   static const coolGray = Color(0xFF8798AD);
   static const japaneseIndigo = Color(0xFF2E384D);
   static const papayaWhip = Color(0xFFFFF0D6);
+
+  // Figma Custom Colors
+  static const figmaPrimary = Color(0xFF98A68A); // Sage Green
+  static const figmaSecondary = Color(0xFF6B8EBF); // Soft Blue
+  static const figmaTertiary = Color(0xFFD9905B); // Muted Orange
+  static const figmaSurface = Color(0xFFFAFAFA); // Off-white Background
 }

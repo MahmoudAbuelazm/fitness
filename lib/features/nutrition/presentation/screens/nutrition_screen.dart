@@ -10,42 +10,72 @@ class NutritionScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text('Add Meal'),
+        title: Text('Nutrition', style: TextStyles.font20BlackW700Inter(context)),
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
+        centerTitle: false,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Track your daily meals',
+              style: TextStyles.font14GreyW400Inter(context),
+            ),
+            SizedBox(height: 24.h(context)),
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.03),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Total Eaten',
-                        style: TextStyles.font14WhiteOpacity70W400Inter(context),
+                      Row(
+                        children: [
+                          Icon(Icons.apple_outlined, color: Theme.of(context).colorScheme.primary),
+                          SizedBox(width: 8.w(context)),
+                          Text(
+                            'Total Calories',
+                            style: TextStyles.font16BlackW400Inter(context).copyWith(fontWeight: FontWeight.w600),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 4.h(context)),
-                      Text(
-                        '1,250 kcal',
-                        style: TextStyles.font24WhiteW700Inter(context),
-                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '1,680',
+                            style: TextStyles.font20BlackW700Inter(context),
+                          ),
+                          Text(
+                            'of 2,200 kcal',
+                            style: TextStyles.font12GreyW400Inter(context),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-                  const Icon(
-                    Icons.local_dining,
-                    color: Colors.white,
-                    size: 40,
+                  SizedBox(height: 16.h(context)),
+                  LinearProgressIndicator(
+                    value: 1680 / 2200,
+                    backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                    color: Theme.of(context).colorScheme.primary,
+                    minHeight: 8,
+                    borderRadius: BorderRadius.circular(4),
                   ),
                 ],
               ),
@@ -53,36 +83,29 @@ class NutritionScreen extends StatelessWidget {
             SizedBox(height: 32.h(context)),
             const _MealSection(
               title: 'Breakfast',
-              totalKcal: 450,
+              icon: Icons.coffee_outlined,
+              totalKcal: 500,
               items: [
-                {'name': 'Oatmeal with berries', 'kcal': 320},
-                {'name': 'Black Coffee', 'kcal': 5},
-                {'name': 'Boiled Egg', 'kcal': 125},
+                {'name': 'Oatmeal with Banana', 'time': '8:30 AM', 'kcal': 320},
+                {'name': 'Protein Shake', 'time': '8:45 AM', 'kcal': 180},
               ],
             ),
             SizedBox(height: 24.h(context)),
             const _MealSection(
               title: 'Lunch',
-              totalKcal: 800,
-              items: [
-                {'name': 'Grilled Chicken Salad', 'kcal': 450},
-                {'name': 'Olive Oil Dressing', 'kcal': 150},
-                {'name': 'Brown Rice', 'kcal': 200},
-              ],
+              icon: Icons.wb_sunny_outlined,
+              totalKcal: 570,
+              items: [],
             ),
             SizedBox(height: 24.h(context)),
             const _MealSection(
               title: 'Dinner',
-              totalKcal: 0,
+              icon: Icons.nights_stay_outlined,
+              totalKcal: 610,
               items: [],
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -90,11 +113,13 @@ class NutritionScreen extends StatelessWidget {
 
 class _MealSection extends StatelessWidget {
   final String title;
+  final IconData icon;
   final int totalKcal;
   final List<Map<String, dynamic>> items;
 
   const _MealSection({
     required this.title,
+    required this.icon,
     required this.totalKcal,
     required this.items,
   });
@@ -121,43 +146,67 @@ class _MealSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyles.font18BlackW700Inter(context),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade50,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(icon, color: Colors.orange, size: 20),
+                    ),
+                    SizedBox(width: 12.w(context)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyles.font16BlackW400Inter(context).copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '$totalKcal kcal',
+                          style: TextStyles.font12GreyW400Inter(context).copyWith(fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Text(
-                  '$totalKcal kcal',
-                  style: TextStyles.font16GreyW500Inter(context).copyWith(fontWeight: FontWeight.w600),
-                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                     border: Border.all(color: Colors.grey.shade200),
+                     borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.add, color: Colors.grey, size: 20),
+                )
               ],
             ),
           ),
           if (items.isNotEmpty)
-            const Divider(height: 1, thickness: 1),
+            const Divider(height: 1, thickness: 1, color: Color(0xFFF3F3F3)),
           ...items.map((item) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      item['name'],
-                      style: TextStyles.font16BlackW400Inter(context),
-                    ),
-                    Text(
-                      '${item['kcal']} kcal',
-                      style: TextStyles.font14GreyW400Inter(context),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['name'],
+                          style: TextStyles.font14GreyW600Inter(context).copyWith(color: Colors.black87),
+                        ),
+                        SizedBox(height: 4.h(context)),
+                        Text(
+                          item['time'],
+                          style: TextStyles.font12GreyW400Inter(context),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               )),
-          if (items.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'No meals logged yet',
-                style: TextStyles.font14GreyW400Inter(context).copyWith(fontStyle: FontStyle.italic),
-              ),
-            ),
         ],
       ),
     );

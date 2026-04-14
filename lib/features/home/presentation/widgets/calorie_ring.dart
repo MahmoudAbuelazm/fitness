@@ -9,7 +9,7 @@ class CalorieRing extends StatelessWidget {
     super.key,
     required this.currentCalories,
     required this.totalCalories,
-    this.size = 180.0,
+    this.size = 200.0,
   });
 
   @override
@@ -26,12 +26,12 @@ class CalorieRing extends StatelessWidget {
         children: [
           CircularProgressIndicator(
             value: 1.0,
-            strokeWidth: 12,
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+            strokeWidth: 16,
+            color: Colors.grey.shade200,
           ),
           CircularProgressIndicator(
             value: progress,
-            strokeWidth: 12,
+            strokeWidth: 16,
             backgroundColor: Colors.transparent,
             color: Theme.of(context).colorScheme.primary,
             strokeCap: StrokeCap.round,
@@ -39,15 +39,19 @@ class CalorieRing extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Icon(Icons.local_fire_department_outlined, color: Theme.of(context).colorScheme.primary, size: 28),
+              const SizedBox(height: 4),
               Text(
                 '$remaining',
                 style: const TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 42,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.black,
+                  height: 1.1,
                 ),
               ),
               const Text(
-                'Kcal Left',
+                'Remaining',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,

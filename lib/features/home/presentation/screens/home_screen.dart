@@ -9,6 +9,9 @@ import 'package:fitness/core/routing/routes.dart';
 import 'package:fitness/core/helpers/extinsions.dart';
 import 'package:fitness/core/theme/styles.dart';
 
+import '../widgets/action_card.dart';
+import '../widgets/activity_unit.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -25,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               return Center(child: Text('Error: ${state.message}'));
             } else if (state is HomeLoaded) {
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -38,27 +41,28 @@ class HomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Today',
-                                style: TextStyles.font16GreyW500Inter(context),
+                                'Fitness',
+                                style: TextStyles.font24BlackW700Inter(context),
                               ),
+                              SizedBox(height: 4.h(context)),
                               Text(
-                                'Wed, 12 Apr',
-                                style: TextStyles.font24PrimaryW700Inter(context),
+                                'Sunday, April 10',
+                                style: TextStyles.font14GreyW400Inter(context),
                               ),
                             ],
                           ),
                           CircleAvatar(
-                            radius: 24,
-                            backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-                            child: Icon(
-                              Icons.person,
-                              color: Theme.of(context).colorScheme.primary,
+                            radius: 22,
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                            child: Text(
+                              'FN',
+                              style: TextStyles.font16WhiteW700Inter(context),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 32.h(context)),
+                    SizedBox(height: 24.h(context)),
                     FadeInUp(
                       duration: const Duration(milliseconds: 600),
                       child: Container(
@@ -68,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.05),
+                              color: Colors.black.withValues(alpha: 0.03),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -76,111 +80,169 @@ class HomeScreen extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            Text(
-                              'Daily Goals',
-                              style: TextStyles.font18BlackW700Inter(context),
-                            ),
-                            SizedBox(height: 24.h(context)),
                             CalorieRing(
                               currentCalories: state.currentCalories,
                               totalCalories: state.totalCalories,
-                              size: 160,
+                              size: 200,
                             ),
                             SizedBox(height: 32.h(context)),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Expanded(
-                                  child: MacroProgressBar(
-                                    title: 'Protein',
-                                    currentGrams: state.currentProtein,
-                                    totalGrams: 150,
-                                    color: Theme.of(context).colorScheme.primary,
-                                  ),
+                                _StatColumn(title: 'Goal', value: '${state.totalCalories}'),
+                                _StatColumn(
+                                  title: 'Consumed', 
+                                  value: '${state.currentCalories}', 
+                                  color: Theme.of(context).colorScheme.primary
                                 ),
-                                SizedBox(width: 16.w(context)),
-                                Expanded(
-                                  child: MacroProgressBar(
-                                    title: 'Carbs',
-                                    currentGrams: state.currentCarbs,
-                                    totalGrams: 200,
-                                    color: Theme.of(context).colorScheme.secondary,
-                                  ),
-                                ),
-                                SizedBox(width: 16.w(context)),
-                                Expanded(
-                                  child: MacroProgressBar(
-                                    title: 'Fat',
-                                    currentGrams: state.currentFat,
-                                    totalGrams: 65,
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                  ),
-                                ),
+                                _StatColumn(title: 'Burned', value: '420'),
                               ],
                             ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(height: 32.h(context)),
+                    SizedBox(height: 24.h(context)),
                     FadeInUp(
                       duration: const Duration(milliseconds: 700),
+                      child: Container(
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.03),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.pie_chart_outline, color: Theme.of(context).colorScheme.secondary),
+                                SizedBox(width: 8.w(context)),
+                                Text(
+                                  'Daily Macros',
+                                  style: TextStyles.font18BlackW700Inter(context),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 24.h(context)),
+                            MacroProgressBar(
+                              title: 'Protein',
+                              currentGrams: state.currentProtein,
+                              totalGrams: 165,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            SizedBox(height: 16.h(context)),
+                            MacroProgressBar(
+                              title: 'Carbs',
+                              currentGrams: state.currentCarbs,
+                              totalGrams: 200,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            SizedBox(height: 16.h(context)),
+                            MacroProgressBar(
+                              title: 'Fat',
+                              currentGrams: state.currentFat,
+                              totalGrams: 65,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24.h(context)),
+                    FadeInUp(
+                      duration: const Duration(milliseconds: 800),
                       child: Row(
                         children: [
                           Expanded(
-                            child: _QuickActionCard(
-                              icon: Icons.restaurant,
-                              title: 'Add Meal',
-                              color: Theme.of(context).colorScheme.primary,
-                              onTap: () {
-                                context.pushNamed(Routes.nutrition);
-                              },
+                            child: ActionCard(
+                              title: "Add Meal",
+                              subtitle: "Track your food",
+                              icon: Icons.restaurant_menu_outlined,
+                              color: Colors.green.shade50,
+                              iconColor: Colors.green,
+                              onTap: () => context.pushNamed(Routes.nutrition),
                             ),
                           ),
                           SizedBox(width: 16.w(context)),
                           Expanded(
-                            child: _QuickActionCard(
-                              icon: Icons.fitness_center,
-                              title: 'Log Workout',
-                              color: Theme.of(context).colorScheme.secondary,
-                              onTap: () {},
+                            child: ActionCard(
+                              title: "Log Workout",
+                              subtitle: "Track exercises",
+                              icon: Icons.fitness_center_outlined,
+                              color: Colors.blue.shade50,
+                              iconColor: Colors.blue,
+                              onTap: () => context.pushNamed(Routes.workout),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 32.h(context)),
+                    SizedBox(height: 24.h(context)),
                     FadeInUp(
-                      duration: const Duration(milliseconds: 800),
+                      duration: const Duration(milliseconds: 900),
                       child: Text(
-                        'Activity',
-                        style: TextStyles.font20BlackW700Inter(context),
+                        "Today's Activity",
+                        style: TextStyles.font18BlackW700Inter(context),
                       ),
                     ),
                     SizedBox(height: 16.h(context)),
                     FadeInUp(
-                      duration: const Duration(milliseconds: 900),
+                      duration: const Duration(milliseconds: 1000),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          _ActivityStatUnit(
-                            icon: Icons.directions_run,
-                            value: '6.4',
-                            unit: 'km',
-                            label: 'Distance',
-                          ),
-                          _ActivityStatUnit(
-                            icon: Icons.local_fire_department,
-                            value: '450',
-                            unit: 'kcal',
-                            label: 'Burned',
-                          ),
-                          _ActivityStatUnit(
-                            icon: Icons.access_time,
-                            value: '45',
-                            unit: 'min',
-                            label: 'Active',
-                          ),
+                        children: [
+                          ActivityUnit(value: "12", label: "Exercises"),
+                          ActivityUnit(value: "45", label: "Minutes"),
+                          ActivityUnit(value: "6,847", label: "Steps"),
                         ],
+                      ),
+                    ),
+                    SizedBox(height: 24.h(context)),
+                    FadeInUp(
+                      duration: const Duration(milliseconds: 1100),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.calculate_outlined, color: Colors.white),
+                            ),
+                            SizedBox(width: 16.w(context)),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "TDEE Calculator",
+                                    style: TextStyles.font16BlackW400Inter(context).copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Calculate your daily calorie needs",
+                                    style: TextStyles.font12GreyW400Inter(context),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.chevron_right, color: Colors.grey),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -193,113 +255,45 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        unselectedItemColor: Colors.grey.shade400,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Stats'),
-          BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: 'Camera'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: 'Nutrition'),
+          BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Workout'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
         ],
+        onTap: (index) {
+          if (index == 1) context.pushNamed(Routes.nutrition);
+          if (index == 2) context.pushNamed(Routes.workout);
+          // if (index == 3) context.pushNamed(Routes.profile);
+        },
       ),
     );
   }
 }
 
-class _QuickActionCard extends StatelessWidget {
-  final IconData icon;
+class _StatColumn extends StatelessWidget {
   final String title;
-  final Color color;
-  final VoidCallback onTap;
-
-  const _QuickActionCard({
-    required this.icon,
-    required this.title,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withValues(alpha: 0.2)),
-        ),
-        child: Column(
-          children: [
-            Icon(icon, size: 32, color: color),
-            SizedBox(height: 12.h(context)),
-            Text(
-              title,
-              style: TextStyles.font16BlackW400Inter(context).copyWith(color: color, fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ActivityStatUnit extends StatelessWidget {
-  final IconData icon;
   final String value;
-  final String unit;
-  final String label;
+  final Color? color;
 
-  const _ActivityStatUnit({
-    required this.icon,
-    required this.value,
-    required this.unit,
-    required this.label,
-  });
+  const _StatColumn({required this.title, required this.value, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Icon(icon, color: Theme.of(context).colorScheme.primary),
-        ),
-        SizedBox(height: 8.h(context)),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(
-              value,
-              style: TextStyles.font18BlackW700Inter(context),
-            ),
-            SizedBox(width: 2.w(context)),
-            Text(
-              unit,
-              style: TextStyles.font12GreyW400Inter(context),
-            ),
-          ],
+        Text(
+          title,
+          style: TextStyles.font12GreyW400Inter(context).copyWith(fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 4.h(context)),
         Text(
-          label,
-          style: TextStyles.font12GreyW400Inter(context),
+          value,
+          style: TextStyles.font18BlackW700Inter(context).copyWith(color: color ?? Colors.black),
         ),
       ],
     );

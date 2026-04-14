@@ -16,11 +16,11 @@ class FitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: ColorsManagers.yankeesBlue,
-          primary: ColorsManagers.yankeesBlue,
-          secondary: ColorsManagers.ceil,
-          tertiary: ColorsManagers.indianRed,
-          surface: Colors.white,
+          seedColor: ColorsManagers.figmaPrimary,
+          primary: ColorsManagers.figmaPrimary,
+          secondary: ColorsManagers.figmaSecondary,
+          tertiary: ColorsManagers.figmaTertiary,
+          surface: ColorsManagers.figmaSurface,
         ),
         textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme,

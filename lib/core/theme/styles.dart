@@ -106,6 +106,14 @@ class TextStyles {
     );
   }
 
+  static TextStyle font24BlackW700Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 24),
+      fontWeight: FontWeightHelper.bold,
+      color: ColorsManagers.eerieBlack,
+    );
+  }
+
   static TextStyle font16BlackW400Inter(BuildContext context) {
     return GoogleFonts.inter(
       fontSize: getResponsiveFontSize(context, fontSize: 16),
