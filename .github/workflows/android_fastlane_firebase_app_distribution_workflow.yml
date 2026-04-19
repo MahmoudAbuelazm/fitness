@@ -40,7 +40,10 @@ jobs:
             echo "FIREBASE_CLI_TOKEN is not set. Please add it to your GitHub Secrets.";
             exit 1;
           fi
-
+      - name: Debug Firebase CLI Token
+        run: echo "FIREBASE_CLI_TOKEN is set"
+        env:
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       # 6. Cache Gradle
       - name: Cache Gradle
         uses: actions/cache@v3
