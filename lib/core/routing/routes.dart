@@ -1,6 +1,5 @@
 class Routes {
-  static const String splash = '/';
-  static const String onboarding = '/onboarding';
+  static const String onboarding = '/';
   static const String goalSelection = '/goal-selection';
   static const String userDetails = '/user-details';
   static const String home = '/home';

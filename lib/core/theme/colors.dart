@@ -30,4 +30,5 @@ class ColorsManagers {
   static const figmaSecondary = Color(0xFF6B8EBF); // Soft Blue
   static const figmaTertiary = Color(0xFFD9905B); // Muted Orange
   static const figmaSurface = Color(0xFFFAFAFA); // Off-white Background
+  static const neutralGreen= Color(0xffA8BBA3);
 }

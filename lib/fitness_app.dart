@@ -30,7 +30,7 @@ class FitnessApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: Routes.splash,
+      initialRoute: Routes.onboarding,
       onGenerateRoute: appRouter.generateRoute,
     );
   }

@@ -7,14 +7,11 @@ import 'package:fitness/features/onboarding/presentation/screens/onboarding_scre
 import 'package:fitness/features/goal_questionnaire/presentation/screens/goal_selection_screen.dart';
 import 'package:fitness/features/goal_questionnaire/presentation/screens/user_details_screen.dart';
 import 'package:fitness/features/workout/presentation/screens/workout_screen.dart';
-import 'package:fitness/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fitness/core/routing/routes.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.splash:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.goalSelection:
