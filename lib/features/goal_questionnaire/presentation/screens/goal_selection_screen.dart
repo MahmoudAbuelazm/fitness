@@ -14,18 +14,9 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
   String? _selectedGoal;
 
   final List<Map<String, String>> _goals = [
-    {
-      'title': 'Lose Weight',
-      'subtitle': 'Create a calorie deficit',
-    },
-    {
-      'title': 'Maintain Weight',
-      'subtitle': 'Stay at your current weight',
-    },
-    {
-      'title': 'Gain Weight',
-      'subtitle': 'Build muscle and mass',
-    },
+    {'title': 'Lose Weight', 'subtitle': 'Create a calorie deficit'},
+    {'title': 'Maintain Weight', 'subtitle': 'Stay at your current weight'},
+    {'title': 'Gain Weight', 'subtitle': 'Build muscle and mass'},
   ];
 
   @override
@@ -38,21 +29,21 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40.h(context)),
+              SizedBox(height: 60.h(context)),
               Text(
                 "What's Your Goal?",
-                style: TextStyles.font24BlackW700Inter(context),
+                style: TextStyles.font30BlackW600Inter(context),
               ),
-              SizedBox(height: 8.h(context)),
               Text(
                 "Choose what you want to achieve",
-                style: TextStyles.font14GreyW400Inter(context),
+                style: TextStyles.font16AsphaltW400Inter(context),
               ),
-              SizedBox(height: 48.h(context)),
+              SizedBox(height: 35.h(context)),
               Expanded(
                 child: ListView.separated(
                   itemCount: _goals.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 16.h(context)),
+                  separatorBuilder: (context, index) =>
+                      SizedBox(height: 16.h(context)),
                   itemBuilder: (context, index) {
                     final goal = _goals[index];
                     final isSelected = _selectedGoal == goal['title'];
@@ -65,10 +56,16 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: isSelected ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1) : Colors.white,
+                          color: isSelected
+                              ? Theme.of(
+                                  context,
+                                ).colorScheme.primary.withValues(alpha: 0.1)
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: isSelected ? Theme.of(context).colorScheme.primary : Colors.grey.shade200,
+                            color: isSelected
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.grey.shade200,
                             width: 2,
                           ),
                           boxShadow: [
@@ -84,9 +81,12 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                           children: [
                             Text(
                               goal['title']!,
-                              style: TextStyles.font18BlackW700Inter(context).copyWith(
-                                color: isSelected ? Theme.of(context).colorScheme.primary : Colors.black,
-                              ),
+                              style: TextStyles.font18BlackW700Inter(context)
+                                  .copyWith(
+                                    color: isSelected
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Colors.black,
+                                  ),
                             ),
                             SizedBox(height: 4.h(context)),
                             Text(
@@ -101,36 +101,36 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                 ),
               ),
               SizedBox(height: 24.h(context)),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _selectedGoal == null
-                      ? null
-                      : () {
-                          context.pushNamed(Routes.userDetails);
-                        },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Next",
-                        style: TextStyles.font16WhiteW700Inter(context),
-                      ),
-                      SizedBox(width: 8.w(context)),
-                      const Icon(Icons.arrow_forward, size: 20),
-                    ],
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: ElevatedButton(
+              //     onPressed: _selectedGoal == null
+              //         ? null
+              //         : () {
+              //             context.pushNamed(Routes.userDetails);
+              //           },
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Theme.of(context).colorScheme.primary,
+              //       foregroundColor: Colors.white,
+              //       padding: const EdgeInsets.symmetric(vertical: 18),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(16),
+              //       ),
+              //       elevation: 0,
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Text(
+              //           "Next",
+              //           style: TextStyles.font16WhiteW700Inter(context),
+              //         ),
+              //         SizedBox(width: 8.w(context)),
+              //         const Icon(Icons.arrow_forward, size: 20),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

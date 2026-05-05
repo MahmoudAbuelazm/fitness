@@ -24,6 +24,7 @@ class ColorsManagers {
   static const coolGray = Color(0xFF8798AD);
   static const japaneseIndigo = Color(0xFF2E384D);
   static const papayaWhip = Color(0xFFFFF0D6);
+  static const asphalt = Color(0xFF6B7567);
 
   // Figma Custom Colors
   static const figmaPrimary = Color(0xFF98A68A); // Sage Green

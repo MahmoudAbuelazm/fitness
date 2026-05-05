@@ -121,7 +121,20 @@ class TextStyles {
       color: ColorsManagers.eerieBlack,
     );
   }
-
+  static TextStyle font30BlackW600Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontWeight: FontWeightHelper.semiBold,
+      color: ColorsManagers.eerieBlack,
+    );
+  }
+ static TextStyle font16AsphaltW400Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 16),
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManagers.asphalt,
+    );
+  }
   static TextStyle font16BlackW400Inter(BuildContext context) {
     return GoogleFonts.inter(
       fontSize: getResponsiveFontSize(context, fontSize: 16),
