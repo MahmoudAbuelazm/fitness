@@ -135,6 +135,13 @@ class TextStyles {
       color: ColorsManagers.asphalt,
     );
   }
+  static TextStyle font30MirageW700Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontWeight: FontWeightHelper.bold,
+      color: ColorsManagers.mirage,
+    );
+  }
   static TextStyle font16BlackW400Inter(BuildContext context) {
     return GoogleFonts.inter(
       fontSize: getResponsiveFontSize(context, fontSize: 16),
@@ -142,7 +149,13 @@ class TextStyles {
       color: ColorsManagers.eerieBlack,
     );
   }
-
+static TextStyle font14HydrocarbonW400Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 14),
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManagers.hydrocarbon,
+    );
+  }
   static TextStyle font14GreyW400Inter(BuildContext context) {
     return GoogleFonts.inter(
       fontSize: getResponsiveFontSize(context, fontSize: 14),

@@ -31,5 +31,54 @@ class ColorsManagers {
   static const figmaSecondary = Color(0xFF6B8EBF); // Soft Blue
   static const figmaTertiary = Color(0xFFD9905B); // Muted Orange
   static const figmaSurface = Color(0xFFFAFAFA); // Off-white Background
-  static const neutralGreen= Color(0xffA8BBA3);
+  static const neutralGreen = Color(0xffA8BBA3);
+  static const mirage=Color(0xff101828);
+  static const hydrocarbon = Color(0xff4A5565);
+
+  // AppColors
+  static const primary = Color(0xFFA8BBA3);
+  static const primaryLight = Color(0x33A8BBA3); // 20% opacity
+  static const primaryBorder = Color(0x4DA8BBA3); // 30% opacity
+
+  // Backgrounds
+  static const scaffold = Color(0xFFFFFFFF);
+  static const cardBg = Color(0xFFFFFFFF);
+  static const inputBg = Color(0xFFF3F5F1);
+
+  // Text
+  static const textDark = Color(0xFF101828);
+  static const textDark2 = Color(0xFF1A1F16);
+  static const textBody = Color(0xFF364153);
+  static const textMuted = Color(0xFF4A5565);
+  static const textLight = Color(0xFF6A7282);
+  static const textSubtle = Color(0xFF6B7567);
+
+  // Borders
+  static const border = Color(0xFFE5E7EB);
+  static const borderLight = Color(0x14000000); // rgba(0,0,0,0.08)
+
+  // Macro colors
+  static const protein = Color(0xFFA8BBA3); // green
+  static const carbs = Color(0xFF6D8CBF); // blue
+  static const fat = Color(0xFFF6A826); // orange
+
+  // Activity stats
+  static const exercises = Color(0xFFA8BBA3);
+  static const minutes = Color(0xFF6D8CBF);
+  static const steps = Color(0xFFF54900);
+
+  // Meal section icons
+  static const breakfastBg = Color(0x21F59E0B);
+  static const lunchBg = Color(0x21A8BBA3);
+  static const dinnerBg = Color(0x213B82F6);
+
+  // Quick action cards
+  static const addMealBorder = Color(0x4DA8BBA3);
+  static const logWorkoutBorder = Color(0x4D2B7FFF);
+
+  // TDEE card
+  static const tdeeBorder = Color(0x4DAD46FF);
+
+  // Input border
+  static const inputBorder = Color(0xFFA8BBA3);
 }

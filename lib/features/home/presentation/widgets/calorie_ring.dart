@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/styles.dart';
+
 class CalorieRing extends StatelessWidget {
   final int currentCalories;
   final int totalCalories;
@@ -39,24 +41,19 @@ class CalorieRing extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.local_fire_department_outlined, color: Theme.of(context).colorScheme.primary, size: 28),
+              Icon(
+                Icons.local_fire_department_outlined,
+                color: Theme.of(context).colorScheme.primary,
+                size: 28,
+              ),
               const SizedBox(height: 4),
               Text(
                 '$remaining',
-                style: const TextStyle(
-                  fontSize: 42,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.black,
-                  height: 1.1,
-                ),
+                style: TextStyles.font30MirageW700Inter(context),
               ),
-              const Text(
+               Text(
                 'Remaining',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyles.font14HydrocarbonW400Inter(context),
               ),
             ],
           ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fitness/core/helpers/extinsions.dart';
-import 'package:fitness/core/routing/routes.dart';
-import 'package:fitness/core/theme/styles.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../core/helpers/extinsions.dart';
+import '../../../../core/theme/colors.dart';
+
+enum GoalType { loseWeight, maintainWeight, gainWeight }
 
 class GoalSelectionScreen extends StatefulWidget {
   const GoalSelectionScreen({super.key});
@@ -11,128 +14,148 @@ class GoalSelectionScreen extends StatefulWidget {
 }
 
 class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
-  String? _selectedGoal;
+  GoalType? _selectedGoal;
 
-  final List<Map<String, String>> _goals = [
-    {'title': 'Lose Weight', 'subtitle': 'Create a calorie deficit'},
-    {'title': 'Maintain Weight', 'subtitle': 'Stay at your current weight'},
-    {'title': 'Gain Weight', 'subtitle': 'Build muscle and mass'},
+  final List<_GoalOption> _goals = [
+    _GoalOption(
+      type: GoalType.loseWeight,
+      title: 'Lose Weight',
+      subtitle: 'Create a calorie deficit',
+    ),
+    _GoalOption(
+      type: GoalType.maintainWeight,
+      title: 'Maintain Weight',
+      subtitle: 'Stay at your current weight',
+    ),
+    _GoalOption(
+      type: GoalType.gainWeight,
+      title: 'Gain Weight',
+      subtitle: 'Build muscle and mass',
+    ),
   ];
+
+  void _onGoalSelected(GoalType type) {
+    setState(() => _selectedGoal = type);
+
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (!mounted) return;
+      context.pushNamed('/user-details', arguments: _selectedGoal);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: ColorsManagers.scaffold,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 27),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 60.h(context)),
+              const SizedBox(height: 32),
               Text(
                 "What's Your Goal?",
-                style: TextStyles.font30BlackW600Inter(context),
-              ),
-              Text(
-                "Choose what you want to achieve",
-                style: TextStyles.font16AsphaltW400Inter(context),
-              ),
-              SizedBox(height: 35.h(context)),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: _goals.length,
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: 16.h(context)),
-                  itemBuilder: (context, index) {
-                    final goal = _goals[index];
-                    final isSelected = _selectedGoal == goal['title'];
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedGoal = goal['title'];
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? Theme.of(
-                                  context,
-                                ).colorScheme.primary.withValues(alpha: 0.1)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: isSelected
-                                ? Theme.of(context).colorScheme.primary
-                                : Colors.grey.shade200,
-                            width: 2,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.02),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              goal['title']!,
-                              style: TextStyles.font18BlackW700Inter(context)
-                                  .copyWith(
-                                    color: isSelected
-                                        ? Theme.of(context).colorScheme.primary
-                                        : Colors.black,
-                                  ),
-                            ),
-                            SizedBox(height: 4.h(context)),
-                            Text(
-                              goal['subtitle']!,
-                              style: TextStyles.font14GreyW400Inter(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                style: GoogleFonts.inter(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                  color: ColorsManagers.textDark2,
+                  height: 1.2,
                 ),
               ),
-              SizedBox(height: 24.h(context)),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: ElevatedButton(
-              //     onPressed: _selectedGoal == null
-              //         ? null
-              //         : () {
-              //             context.pushNamed(Routes.userDetails);
-              //           },
-              //     style: ElevatedButton.styleFrom(
-              //       backgroundColor: Theme.of(context).colorScheme.primary,
-              //       foregroundColor: Colors.white,
-              //       padding: const EdgeInsets.symmetric(vertical: 18),
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(16),
-              //       ),
-              //       elevation: 0,
-              //     ),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         Text(
-              //           "Next",
-              //           style: TextStyles.font16WhiteW700Inter(context),
-              //         ),
-              //         SizedBox(width: 8.w(context)),
-              //         const Icon(Icons.arrow_forward, size: 20),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              const SizedBox(height: 8),
+              Text(
+                'Choose what you want to achieve',
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: ColorsManagers.textSubtle,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 32),
+              ..._goals.map(
+                (goal) => Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _GoalCard(
+                    option: goal,
+                    isSelected: _selectedGoal == goal.type,
+                    onTap: () => _onGoalSelected(goal.type),
+                  ),
+                ),
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GoalOption {
+  final GoalType type;
+  final String title;
+  final String subtitle;
+
+  const _GoalOption({
+    required this.type,
+    required this.title,
+    required this.subtitle,
+  });
+}
+
+class _GoalCard extends StatelessWidget {
+  final _GoalOption option;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _GoalCard({
+    required this.option,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(25.6, 25.6, 25.6, 25.6),
+        decoration: BoxDecoration(
+          color: ColorsManagers.cardBg,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected
+                ? ColorsManagers.primary
+                : const Color(0x14000000),
+            width: isSelected ? 1.6 : 1.6,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              option.title,
+              style: GoogleFonts.inter(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: ColorsManagers.textDark2,
+                height: 1.4,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              option.subtitle,
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: ColorsManagers.textSubtle,
+                height: 1.43,
+              ),
+            ),
+          ],
         ),
       ),
     );
