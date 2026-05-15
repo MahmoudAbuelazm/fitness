@@ -73,6 +73,13 @@ class TextStyles {
       color: ColorsManagers.eerieBlack,
     );
   }
+  static TextStyle font14TranquilBlackW400Inter(BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 14),
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManagers.tranquilBlack,
+    );
+  }
 
   static TextStyle font20BlackW700Inter(BuildContext context) {
     return GoogleFonts.inter(
@@ -147,6 +154,13 @@ class TextStyles {
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontWeight: FontWeightHelper.regular,
       color: ColorsManagers.eerieBlack,
+    );
+  }
+  static TextStyle font16MirageW600Inter (BuildContext context) {
+    return GoogleFonts.inter(
+      fontSize: getResponsiveFontSize(context, fontSize: 16),
+      fontWeight: FontWeightHelper.semiBold,
+      color: ColorsManagers.mirage,
     );
   }
 static TextStyle font14HydrocarbonW400Inter(BuildContext context) {

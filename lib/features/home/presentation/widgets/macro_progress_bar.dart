@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/styles.dart';
+
 class MacroProgressBar extends StatelessWidget {
   final String title;
   final int currentGrams;
@@ -22,21 +24,23 @@ class MacroProgressBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
+              style: TextStyles.font14TranquilBlackW400Inter(context),
+            ),
+            Spacer(),
+            Text(
+              '$currentGrams',
+              style: TextStyle(
                 fontSize: 14,
+                color: color,
+                fontWeight: FontWeight.w600,
               ),
             ),
             Text(
-              '$currentGrams / ${totalGrams}g',
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.grey,
-              ),
+              '/${totalGrams}g',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
         ),

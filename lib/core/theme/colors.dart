@@ -34,6 +34,7 @@ class ColorsManagers {
   static const neutralGreen = Color(0xffA8BBA3);
   static const mirage=Color(0xff101828);
   static const hydrocarbon = Color(0xff4A5565);
+  static const tranquilBlack = Color(0xff364153);
 
   // AppColors
   static const primary = Color(0xFFA8BBA3);
